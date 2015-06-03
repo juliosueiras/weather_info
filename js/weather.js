@@ -3,18 +3,23 @@
     $('#weather_submit').click(function() {
 
         $.ajax({
+            type:"POST",
             url: "http://api.wunderground.com/api/231c3e1e6f58bfd1/geolookup/conditions/q/CA/" + $('#weather_location').val() + ".json",
             dataType: "jsonp",
             success: function(parsed_json) {
 
-                generate_weather_card(parsed_json);
+                generate_weather_card_and_extra_info(parsed_json);
 
-                Materialize.toast('Found 1 City', 3000, 'rounded')
             }
         });
     });
 
-    generate_weather_card = function(parsed_json) {
+    generate_weather_card_and_extra_info = function(parsed_json) {
+        if(typeof parsed_json['location'] == "undefined"){
+            Materialize.toast('No City Found', 3000, 'rounded')
+            return;
+        }
+
         var location = parsed_json['location']['city'];
         location = location.toLowerCase().replace(/\b[a-z]/g, function(letter) {
             return letter.toUpperCase();
@@ -31,7 +36,9 @@
         $('#weather_extra').html(generate_weather_infos(parsed_json));
 
         $('#weather_extra').collapsible();
+        Materialize.toast('Found 1 City', 3000, 'rounded')
     }
+
     generate_weather_infos = function(parsed_weather_data) {
 
         var extra_info_list = {
