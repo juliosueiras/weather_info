@@ -2,10 +2,6 @@ Readme
 ======
 Weather Info Web App
 
-TODO
-====
-- [ ] Responsive Design(for mobile)
-- [ ] AutoComplete for location
 
 References
 ==========
