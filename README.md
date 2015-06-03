@@ -4,8 +4,7 @@ Weather Info Web App
 
 TODO
 ====
-- [ ] Responsive Design(for mobile)
-- [ ] AutoComplete for location
+- [x] Responsive Design(for mobile)
 
 References
 ==========
